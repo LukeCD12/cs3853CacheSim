@@ -2,6 +2,9 @@
 import math
 import random
 
+compulsory_miss = 0
+conflict_miss = 0
+
 
 class Row:
     def __init__(self,
@@ -241,7 +244,7 @@ class Cache():
 
 
     def impl_mem_size(self):
-        return f'{self.total_memory_size} KB ({self.overhead_bytes} bytes)'
+        return f'{self.total_memory_size} KB ({int(self.total_memory_size * 1024)} bytes)'
         
         
 
@@ -271,8 +274,8 @@ class Cache():
     def __str__(self):
         return (
             f'Total # Blocks:                 {math.ceil(self.size / self.block_size)}\n'
-            f'Tag Size:                       {self.tag_bits}\n'
-            f'Index Size:                     {self.index_bits}\n'
+            f'Tag Size:                       {self.tag_bits} bits\n'
+            f'Index Size:                     {self.index_bits} bits\n'
             f'Total # Rows:                   {self.columns[0].num_rows}\n'
             f'Overhead Size:                  {self.overhead_size()}\n'
             f'Implementation Memory Size:     {self.impl_mem_size()}\n'

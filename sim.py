@@ -9,6 +9,15 @@ sys.argv.pop(0)
 
 usage = "python sim.py -f trace_file -s size_in_KB -b block_size -a associativity -r replacment_policy"
 
+def get_policy_full(policy):
+    if policy == 'RR':
+        return 'Round Robin'
+    elif policy == 'RND':
+        return 'Random'
+    elif policy == 'LRU':
+        return 'Least Recently Used'
+    else:
+        return policy
 
 def get_param_switch(switch):
     f = sys.argv.index(switch)
@@ -44,10 +53,10 @@ print(f'R-Policy: {policy}\n')
 print("Cache Simulator - CS 3853 Spring 2020 - Team 15\n")
 print(f'Trace File:                     {filename}\n')
 print("****** Cache Input Parameters ******\n")
-print(f'Cache Size:                     {cacheSize}')
-print(f'Block Size:                     {blockSize}')
+print(f'Cache Size:                     {cacheSize} KB')
+print(f'Block Size:                     {blockSize} bytes')
 print(f'Associativity:                  {associativity}')
-print(f'Replacement Policy:             {policy}\n')
+print(f'Replacement Policy:             {get_policy_full(policy)}\n')
 print("***** Calculated Values *****\n")
 
 cache = Cache(size=cacheSize, associativity=associativity, block_size=blockSize, alg=policy)
@@ -96,7 +105,6 @@ for lines in f:
         #     print(f'dest: {dest} \t src: {src}')
 
     stopPoint += 1
-
 
 print("\n***** CACHE SIMULATION RESULTS *****\n")
 print(cache.results())
