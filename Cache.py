@@ -190,11 +190,12 @@ class Cache():
 
     def find_item(self, index, tag, block_offset, num_bytes):
         
-        self.total_access += 1
+        #self.total_access += 1
 
         # print(f"TAG: {tag}\tINDEX: {index}\tblock_offset: {block_offset}")
         for col in self.columns:
             if col.data_access(index, tag):
+                self.total_access += 1
                 # print("Access!")
                 self.hits += 1
                 self.on_hit()
@@ -264,8 +265,6 @@ class Cache():
             f'CPI:                              {"{0:.3}".format(self.total_cycles / self.instr_count)} Cycles/Instruction\n'
             f'Unused Cache Space:               {self.unused_space()}\n'
             f'Unused Cache Blocks:              {math.ceil(self.size / self.block_size) - self.compulsory_miss} / {math.ceil(self.size / self.block_size)}\n'
-
-
         )
 
     def __str__(self):

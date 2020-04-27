@@ -111,5 +111,3 @@ print(cache.results())
 
 print("\n***** CACHE HIT & MISS RATE: *****\n")
 print(cache.cpi_rate())
-
-print(f"Sanity check: {cache_access}")
